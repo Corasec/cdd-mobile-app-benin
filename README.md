@@ -4,11 +4,9 @@
 
 ### Configuration URL
 
-URLs for CouchDB Database
-`src/utils/databaseManager.js`
+Update `remoteDB` in `src/utils/databaseManager.js` with your CouchDB Database url
 
-URL for Web App
-`src/services/API.js`
+Update `baseURL` in `src/services/API.js` with your web app url
 
 ### Development 
 `expo start`

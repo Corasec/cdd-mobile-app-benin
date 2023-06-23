@@ -7,6 +7,8 @@ import { Layout } from '../components/common/Layout';
 import LocalDatabase from '../utils/databaseManager';
 import { View } from 'native-base';
 
+let total_tasks = 29
+
 function ListHeader() {
 
   const [name, setName] = useState(null);
@@ -41,7 +43,7 @@ function ListHeader() {
       selector: { type: 'task' },
     })
       .then((result: any) => {
-        if(nbr_villages && nbr_villages != 0 && (((result?.docs ?? []).length/44) == nbr_villages)){
+        if(nbr_villages && nbr_villages != 0 && (((result?.docs ?? []).length/total_tasks) == nbr_villages)){
           setAllDocsAre(true);
         }else{
           setAllDocsAre(false);

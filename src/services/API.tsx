@@ -1,6 +1,6 @@
 
 //Change the baseURL to the backend server base url
-const baseURL = 'https://your-domain/';
+const baseURL = 'http://192.168.122.1:8000/';
 export { baseURL };
 function handleErrors(response) {
   if (response.non_field_errors) {

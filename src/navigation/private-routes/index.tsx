@@ -62,10 +62,26 @@ export default function PrivateRoutes(): JSX.Element {
         name="GrievanceRedressMechanism"
         component={VillageDetail}
       />
-      <Stack.Screen name="PhaseDetail" component={PhaseDetail} />
-      <Stack.Screen name="ActivityDetail" component={ActivityDetail} />
-      <Stack.Screen name="TaskDetail" component={TaskDetail} />
-      <Stack.Screen name="SupportingMaterials" component={SupportingMaterials} />
+      <Stack.Screen 
+        options={{ title: "Détails de la phase" }}
+        name="PhaseDetail" 
+        component={PhaseDetail} 
+      />
+      <Stack.Screen 
+        options={{ title: "Détails de l'étape" }}
+        name="ActivityDetail" 
+        component={ActivityDetail} 
+      />
+      <Stack.Screen 
+        options={{ title: "Détails de la tâche" }}
+        name="TaskDetail" 
+        component={TaskDetail} 
+      />
+      <Stack.Screen 
+        options={{ title: "Matériels de soutien" }}
+        name="SupportingMaterials" 
+        component={SupportingMaterials} 
+      />
     </Stack.Navigator>
   );
 }

@@ -29,6 +29,7 @@ import { useNavigation } from '@react-navigation/native';
 import { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import { Layout } from '../components/common/Layout';
 import LocalDatabase from '../utils/databaseManager';
+import { baseURL } from '../services/API';
 
 import CustomDropDownPicker from '../components/common/CustomDropdownPicker';
 import AuthContext from '../contexts/auth';
@@ -100,6 +101,30 @@ let options = {}; // optional rendering options (see documentation)
 //     </Stack>
 //   );
 // }
+
+// Custom validation function for the date format
+import tcomb from 'tcomb-validation';
+
+function isDate(value: string) {
+  // DD-MM-YYYY format
+  var regex = /^(\d{2})-(\d{2})-(\d{4})$/;
+  return regex.test(value);
+}
+
+transform.registerFormat('date', isDate);
+
+// custom tcomb type for the date format
+const DatePicker = tcomb.refinement(tcomb.String, (value) => {
+  return isDate(value);
+});
+
+DatePicker.getValidationErrorMessage = (value) => {
+  return 'Format invalide. La date doit respecter le format DD-MM-YYYY.';
+};
+
+transform.registerType(DatePicker, 'date-picker');
+
+
 
 
 
@@ -343,7 +368,7 @@ function TaskDetail({ route }) {
           console.log(elt?.attachment.uri)
           try {
             const response = await FileSystem.uploadAsync(
-              `https://cddanadeb.e3grm.org/attachments/upload-to-issue`,
+              `${baseURL}attachments/upload-to-issue`,
               elt?.attachment.uri,
               {
                 fieldName: 'file',

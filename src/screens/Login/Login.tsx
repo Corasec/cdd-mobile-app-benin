@@ -40,7 +40,8 @@ function Login() {
       .then(response => {
         setLoading(false);
         if (response.error) {
-          return;
+          console.error(response.error)
+          return response.error;
         }
         signIn(response);
         save('session', response);
@@ -111,7 +112,7 @@ function Login() {
               color: '#24c38b',
             }}
           >
-            Bienvenu! Accédez à votre compte ici
+            Bienvenue! Accédez à votre compte ici
           </Text>
         </View>
         <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
