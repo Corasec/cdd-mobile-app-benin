@@ -52,7 +52,7 @@ export default function PrivateRoutes(): JSX.Element {
         component={VillageDetail}
       />
       <Stack.Screen
-        options={{ title: 'Sélectionnez un village' }}
+        options={{ title: 'Sélectionnez un niveau administratif' }}
         name="SelectVillage"
         component={SelectVillage}
       />

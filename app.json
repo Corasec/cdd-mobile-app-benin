@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "cdd-app",
-    "slug": "cdd-app",
+    "name": "cdd-benin-app",
+    "slug": "cdd-benin-app",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -24,14 +24,14 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.leonardogutierrezh.cddapp"
+      "package": "com.cosobenin.cddapp"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
     "extra": {
       "eas": {
-        "projectId": "cb287c66-fd34-4299-94e9-c14625eda8af"
+        "projectId": "9e276a1d-64ca-4452-ba25-583256c3285c"
       }
     }
   }

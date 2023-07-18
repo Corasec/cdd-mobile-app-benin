@@ -7,12 +7,14 @@ import { Layout } from '../components/common/Layout';
 import LocalDatabase from '../utils/databaseManager';
 import { View } from 'native-base';
 
-let total_tasks = 29
+let total_tasks = {"AC-SDCC": 3, "FGB": 1, "SC": 11, "FT": 1, "FC": 32, "TOTAL": 48};
+let tasks_cut = {"AC-SDCC": 0, "FGB": 1, "SC": 2, "FT": 2, "FC": 3};
 
 function ListHeader() {
 
   const [name, setName] = useState(null);
   const [email, setEmail] = useState(null);
+  const [role, setRole] = useState(null);
   const [allDocsAre, setAllDocsAre] = useState(false);
 
   function getNameAndEmail(){
@@ -22,6 +24,7 @@ function ListHeader() {
       .then((result: any) => {
         setName(result?.docs[0]?.name ?? null);
         setEmail(result?.docs[0]?.email ?? null);
+        setRole(result?.docs[0]?.role ?? null);
         
         if(!result?.docs[0]?.name){
           getNameAndEmail()
@@ -43,12 +46,14 @@ function ListHeader() {
       selector: { type: 'task' },
     })
       .then((result: any) => {
-        if(nbr_villages && nbr_villages != 0 && (((result?.docs ?? []).length/total_tasks) == nbr_villages)){
+        // TO DO: load count logic
+        if(nbr_villages && nbr_villages != 0 && ((((result?.docs ?? []).length/total_tasks[role]) + tasks_cut[role]) == nbr_villages)){
           setAllDocsAre(true);
         }else{
           setAllDocsAre(false);
           allDocsAreGet(nbr_villages);
         }
+        // setAllDocsAre(true);
       })
       .catch((err: any) => {
         setAllDocsAre(false);

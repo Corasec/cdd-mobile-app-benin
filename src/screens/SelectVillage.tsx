@@ -63,7 +63,13 @@ function SelectVillage() {
                   const _completedTasks = tasksResults.filter(i => i.completed).length;
                   total_tasks += tasksResults.length;
                   total_tasks_completed += _completedTasks;
-                  villagesResult[index_village].value_progess_bar = total_tasks != 0 ? ((total_tasks_completed / total_tasks) * 100) : 0;
+                  villagesResult[index_village].value_progess_bar = total_tasks != 0 ? ((total_tasks_completed / total_tasks) * 100) : null;
+                  if(villagesResult[index_village].value_progess_bar == null){
+                    villagesResult[index_village].comp_progress_bar = <Button bgColor="#8a2be2" w="70%"> Pas de tâches </Button>;
+                  }
+                  else{
+                    villagesResult[index_village].comp_progress_bar = <ProgressBarAndroid styleAttr="Horizontal" color="primary.500" />;
+                  }
                   
                   if(villagesResult.length == (index_village+1)){
                     setVillages([]);
@@ -159,8 +165,7 @@ function SelectVillage() {
                   
                 >
                   <Text style={{ fontSize: 10, color: 'white' }}>{`${(item.value_progess_bar).toFixed(2)}%`}</Text>
-                </Progress></>) : <ProgressBarAndroid 
-                  styleAttr="Horizontal" color="primary.500" />}
+                </Progress></>) : item.comp_progress_bar }
               </Box>
               <Button
                 bgColor="primary.500"

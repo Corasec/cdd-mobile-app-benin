@@ -1,6 +1,6 @@
 
 //Change the baseURL to the backend server base url
-const baseURL = 'http://192.168.122.1:8000/';
+const baseURL = 'https://cdd.coso.gouv.bj/';
 export { baseURL };
 function handleErrors(response) {
   if (response.non_field_errors) {

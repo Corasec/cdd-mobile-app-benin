@@ -58,7 +58,27 @@ t.form.Form.stylesheet.button.backgroundColor = '#24c38b';
 t.form.Form.stylesheet.controlLabel.normal.color = '#707070';
 t.form.Form.stylesheet.pickerTouchable.normal.borderWidth = 1;
 t.form.Form.stylesheet.controlLabel.normal.color = '#707070';
+
 const transform = require('tcomb-json-schema');
+
+function isDate(value: string) {
+    // DD-MM-YYYY format
+    var regex = /^(\d{2})-(\d{2})-(\d{4})$/;
+    return regex.test(value);
+  }
+  
+  transform.registerFormat('date', isDate);
+  
+  // custom tcomb type for the date format
+  const DatePicker = tcomb.refinement(tcomb.String, (value) => {
+    return isDate(value);
+  });
+  
+  DatePicker.getValidationErrorMessage = (value) => {
+    return 'Format invalide. La date doit respecter le format DD-MM-YYYY.';
+  };
+  
+  transform.registerType(DatePicker, 'date-picker');
 
 const { Form } = t.form;
 let options = {}; // optional rendering options (see documentation)
@@ -105,31 +125,13 @@ let options = {}; // optional rendering options (see documentation)
 // Custom validation function for the date format
 import tcomb from 'tcomb-validation';
 
-function isDate(value: string) {
-  // DD-MM-YYYY format
-  var regex = /^(\d{2})-(\d{2})-(\d{4})$/;
-  return regex.test(value);
-}
-
-transform.registerFormat('date', isDate);
-
-// custom tcomb type for the date format
-const DatePicker = tcomb.refinement(tcomb.String, (value) => {
-  return isDate(value);
-});
-
-DatePicker.getValidationErrorMessage = (value) => {
-  return 'Format invalide. La date doit respecter le format DD-MM-YYYY.';
-};
-
-transform.registerType(DatePicker, 'date-picker');
-
 
 
 
 
 
 function TaskDetail({ route }) {
+
   const { user } = useContext(AuthContext);
   const { task, onTaskComplete, currentPage } = route.params;
   const navigation =
@@ -377,7 +379,7 @@ function TaskDetail({ route }) {
                 parameters: user,
               },
             );
-            console.log(response)
+            console.log("response", response)
             body = JSON.parse(response.body);
             console.log(body.fileUrl)
             elt.attachment.uri = body.fileUrl;
